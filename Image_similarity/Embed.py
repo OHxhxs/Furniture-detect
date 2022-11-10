@@ -9,6 +9,10 @@ from sklearn.metrics.pairwise import cosine_distances,pairwise_distances,cosine_
 from PIL import Image
 import pandas as pd
 
+import os
+
+print(os.getcwd())
+# print(os.listdir())
 # Load the pretrained model
 model = torch.load('./Image_similarity/furniture_resnet34.pth', map_location=torch.device('cpu'))
 

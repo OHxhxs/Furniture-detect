@@ -50,7 +50,7 @@ def create_app():
     def Add_Furniture_Image():
         img_file = request.files['img']
 
-        save_img_path = f'./last/furniture_upload/{img_file.filename}'
+        save_img_path = f'./furniture_upload_folder/{img_file.filename}'
         img_file.save(save_img_path)
 
         print("gggggggggggggggg")
@@ -58,10 +58,12 @@ def create_app():
         img_vec_df['image'] = img_file.filename
         img_vec_df.rename(columns=lambda x: str(x), inplace=True)
 
-        with open('/last/Image_similarity/Embedding_img.csv', mode='a', newline='') as f:
+        with open('./Image_similarity/Embedding_img.csv', mode='a', newline='') as f:
             csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             csv_writer.writerow(img_vec_df.iloc[0])
             f.close()
+
+        os.remove(save_img_path)
 
         return "upload_vector_done!"
 
@@ -78,7 +80,7 @@ def create_app():
 
         crop_model(save_img_path)
 
-        image_class_list = os.listdir('C:/Users/HP/Desktop/LastProject/last/runs/detect/exp/crops')
+        image_class_list = os.listdir('./runs/detect/exp/crops')
         print(image_class_list)
 
         # print('C:/Users/HP/Desktop/LastProject/last/runs/detect/exp/crops/*/*.jpg')
@@ -87,7 +89,7 @@ def create_app():
         # for i,furnitures in enumerate(glob(crop_path + '/*/*.jpg')):
 
 
-        crop_img_path = glob('C:/Users/HP/Desktop/LastProject/last/runs/detect/exp/crops/*/*.jpg')
+        crop_img_path = glob('./runs/detect/exp/crops/*/*.jpg')
 
         Crop_detect_list = []
         for crop_img in crop_img_path:
@@ -102,12 +104,14 @@ def create_app():
             os.remove(save_img_path)
 
         if os.path.exists('./runs/detect/exp/crops'):
-            shutil.rmtree('C:/Users/HP/Desktop/LastProject/last/runs')
+            shutil.rmtree('./runs')
 
         return str(len(Crop_detect_list))
 
 
 
+
+    # 가구 누를 시 이미지 유사도 계산
     @app.route('/get_image',methods=['POST'])
     def Get_Image_Embedding():
         img_file = request.files['img']
@@ -120,7 +124,7 @@ def create_app():
         sim_list = image_to_vec(save_img_path)
         print(sim_list)
 
-        if os.path.exists('/last/Embedding_image_folder'):
+        if os.path.exists('./Embedding_image_folder'):
             os.remove(save_img_path)
 
         # ## 바이트 가져오기

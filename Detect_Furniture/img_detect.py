@@ -3,8 +3,8 @@ import io
 
 import torch
 
-model_yolo = torch.hub.load('C:/Users/HP/Desktop/LastProject/last/yolov5', 'custom',
-                                    path='C:/Users/HP/Desktop/LastProject/last/Detect_Furniture/best.pt',
+model_yolo = torch.hub.load('yolov5', 'custom',
+                                    path='./Detect_Furniture/best.pt',
                                     source='local')
 
 
