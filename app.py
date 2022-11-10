@@ -19,8 +19,8 @@ def image_to_byte_array(image_path):
     return imgByteArr
 
 
-# 채팅 필터 모델
-from Chat.Chat_Filter import filter_chatting
+# # 채팅 필터 모델
+# from Chat.Chat_Filter import filter_chatting
 
 # 이미지 유사도 임베딩 모델
 from Image_similarity.Embed import get_vector
@@ -39,12 +39,12 @@ def create_app():
     def index():
         return '안녕하세요'
 
-    @app.route('/filter',methods=['POST'])
-    def fiLter():
-        chat_text = request.json['CHAT']
-        res_text = filter_chatting(chat_text)
-
-        return res_text
+    # @app.route('/filter',methods=['POST'])
+    # def fiLter():
+    #     chat_text = request.json['CHAT']
+    #     res_text = filter_chatting(chat_text)
+    #
+    #     return res_text
 
     @app.route('/add_furniture', methods=['POST'])
     def Add_Furniture_Image():
