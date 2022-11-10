@@ -3,7 +3,7 @@ import io
 
 import torch
 
-model_yolo = torch.hub.load('yolov5', 'custom',
+model_yolo = torch.hub.load('ddd', 'custom',
                                     path='./Detect_Furniture/best.pt',
                                     source='local')
 
