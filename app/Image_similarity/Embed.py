@@ -97,7 +97,7 @@ def image_to_vec(image_path):
     curr_index = get_img_embedding_df[get_img_embedding_df['image'] == image_path.split('/')[-1]].index[0]
     print(curr_index)
     # 그 인덱스로 유사한 이미지들 추출
-    closest_image = pd.DataFrame(cosine_similarity_df.iloc[curr_index].nlargest(10)[1:])
+    closest_image = pd.DataFrame(cosine_similarity_df.iloc[curr_index].nlargest(6)[1:])
     print(closest_image)
 
     sim_list = []
