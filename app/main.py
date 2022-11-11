@@ -23,11 +23,11 @@ def image_to_byte_array(image_path):
 # from Chat.Chat_Filter import filter_chatting
 
 # 이미지 유사도 임베딩 모델
-from Image_similarity.Embed import get_vector
-from Image_similarity.Embed import image_to_vec
+from .Image_similarity.Embed import get_vector
+from .Image_similarity.Embed import image_to_vec
 
 # 방 사진에서 가구 이미지 크롭
-from Detect_Furniture.img_detect import crop_model
+from .Detect_Furniture.img_detect import crop_model
 
 # s3용
 # from connection import s3_connection,s3_get_image_url
@@ -70,7 +70,8 @@ def create_app():
     #     res_text = filter_chatting(chat_text)
     #
     #     return res_text
-
+    
+    # 이미지 올렸을 시 vector값 저장
     @app.route('/add_furniture', methods=['POST'])
     def Add_Furniture_Image():
         img_file = request.files['img']
@@ -95,6 +96,7 @@ def create_app():
     # @app.route('/img_to_byte', methods=['POST'])
     # def Image_To_Byte():
 
+    # 가구를 찾고 crop된 이미지 return
     @app.route('/image_furniture_detect', methods=['POST'])
     def Furniture_Detecter():
         img_file = request.files['img']
@@ -161,4 +163,4 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
